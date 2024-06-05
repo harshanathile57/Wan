@@ -3,6 +3,10 @@ pipeline{
   	triggers {
   pollSCM '* * * * *'
     	}
+	parameters {
+  choice choices: ['DEV', 'QA', 'UAT'], name: 'ENV'
+	}
+
          stages{
               stage("Checkout scm") {
          steps{ 
@@ -16,7 +20,13 @@ pipeline{
                             } 
          stage("Deployment"){
                 steps{
-         sh 'cp target/Wan.war /home/harsh/Documents/apache-tomcat-9.0.88/webapps'    
+sh '''if [ $ENV == "DEV" ];then
+cp target/Wan.war  /home/harsh/Documents/apache-tomcat-9.0.88/webapps\'
+elif[ $ENV == "QA" ]; then
+cp target/Wan.war  /home/harsh/Documents/apache-tomcat-9.0.88/webapps\'
+elif [ $ENV == "UAT" ];then
+cp target/Wan.war  /home/harsh/Documents/apache-tomcat-9.0.88/webapps\'
+fi'''
                                    }
                            }             
                           }
