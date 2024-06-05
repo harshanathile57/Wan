@@ -22,7 +22,7 @@ pipeline{
                 steps{
 sh '''if [ $ENV == "DEV" ];then
 cp target/Wan.war  /home/harsh/Documents/apache-tomcat-9.0.88/webapps
-elif[ $ENV == "QA" ]; then
+elif [ $ENV == "QA" ];then
 cp target/Wan.war  /home/harsh/Documents/apache-tomcat-9.0.88/webapps
 elif [ $ENV == "UAT" ];then
 cp target/Wan.war  /home/harsh/Documents/apache-tomcat-9.0.88/webapps
